@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaClock, FaQuestionCircle } from "react-icons/fa";
 import backgroundImage from "../assets/images/snake11.png";
-import whatsappImage from '/whatsapp.jpeg';
+import companyImage from "/whatsapp.jpeg";
 
 const Level1 = ({ setCompletedLevels }) => {
   const location = useLocation();
@@ -367,9 +367,3 @@ const Level1 = ({ setCompletedLevels }) => {
 };
 
 export default Level1;
-
-
-/* The changes made to the `Level1.jsx` code include adding a company logo image that displays for 30 seconds and fades out, followed by a set of game rules with a "Start Playing" button to initiate the level. 
-A new state (`showImage`, `showRules`, `gameStarted`) was introduced along with a `useEffect` hook to manage the 30-second timer for the image transition to rules. 
-The rules section was styled to match the provided design, and the font sizes were adjusted with the header set to a larger, bold `text-3xl` and the body text to a slightly smaller `text-lg`.
-Debug console logs were added to troubleshoot image loading and state transitions, and the game content is only rendered after the "Start Playing" button is clicked, ensuring the original level logic remains intact within the new flow. */
