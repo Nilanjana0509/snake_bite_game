@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaClock, FaQuestionCircle } from "react-icons/fa";
 import backgroundImage from "../assets/images/snake11.png";
-import companyImage from "/Users/avijeetmukhoty/Documents/2025/Snake-Bite-Game/public/whatsapp.jpeg";
+import whatsappImage from '/whatsapp.jpeg';
 
 const Level1 = ({ setCompletedLevels }) => {
   const location = useLocation();
