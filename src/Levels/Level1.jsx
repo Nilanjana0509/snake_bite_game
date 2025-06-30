@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaClock, FaQuestionCircle, FaStar } from "react-icons/fa";
+import { FaClock, FaQuestionCircle } from "react-icons/fa";
 import backgroundImage from "../assets/images/snake11.png";
-import videoFile from "../assets/videos/How_to_Immobilize_like_a_fractured_limb.mp4";
 
 const Level1 = ({ setCompletedLevels }) => {
   const location = useLocation();
@@ -17,27 +16,16 @@ const Level1 = ({ setCompletedLevels }) => {
   const [showWrongPopup, setShowWrongPopup] = useState(false);
   const [result, SetResult] = useState([]);
   const [sc, setsc] = useState(0);
-  const [starCount, setStarCount] = useState(0);
   // const [countdown, setCountdown] = useState(3000);
-  const [isDropdownVisible, setDropdownVisible] = useState(false); // State for dropdown visibility
+
   const handleCompleteLevel1 = () => {
     // Mark level 1 as completed
     const completedLevels = { level1: true };
     localStorage.setItem("completedLevels", JSON.stringify(completedLevels));
     setCompletedLevels(completedLevels);
     // Automatically navigate to level 2
-    navigate("/level2", { state: { prev: '1' } });
+    navigate("/level2");
   };
-  // Function to toggle the Help Button Dropdown
-  const toggleDropdown = () => {
-    setDropdownVisible(!isDropdownVisible);
-  };
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("path")) || {};
-    const trueCount = Object.values(data).filter(value => value === true).length;
-    setStarCount(trueCount);
-
-  }, [])
   useEffect(() => {
     // Save the current level path to localStorage
     localStorage.setItem("currentLevel", location.pathname);
@@ -246,7 +234,6 @@ const Level1 = ({ setCompletedLevels }) => {
 
   const handleSuccessClose = () => {
     setShowSuccessPopup(false);
-
     handleCompleteLevel1();
   };
 
@@ -282,42 +269,25 @@ const Level1 = ({ setCompletedLevels }) => {
         backgroundSize: "cover",
       }}
     >
-      {/* Star count on the top-left corner */}
-      <div className="absolute top-4 left-4 flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <FaStar className="text-yellow-500 text-xl sm:text-2xl" />
-          <span className="text-slate-50 text-sm sm:text-base">{starCount}</span>
-        </div>
-      </div>
       {/* Icons on the top-right corner */}
       <div className="absolute top-4 right-4 flex items-center gap-4">
-        {/* <div className="flex items-center gap-2 cursor-pointer">
+        <div className="flex items-center gap-2 cursor-pointer">
           <FaClock className="text-slate-50 text-xl sm:text-2xl" />
-        </div> */}
 
-        <div className="flex items-center gap-2 cursor-pointer" onClick={toggleDropdown}>
+          {/*<h2 className="text-xl text-blue-600 font-bold">
+           {countdown} s
+          </h2>*/}
+        </div>
+        <div className="flex items-center gap-2 cursor-pointer">
           <FaQuestionCircle className="text-slate-50 text-xl sm:text-2xl" />
           <span className="text-slate-50 text-sm sm:text-base">Help</span>
         </div>
       </div>
 
-      {isDropdownVisible && (
-        <>
-          <div className="dropdown absolute top-12 right-4 bg-white rounded-lg text-center">
-            {/* <FaCaretUp className="absolute top-10 right-4"/> */}
-            <p className="text-black text-base font-bold">How to Immobilize like a fractured limb?</p>
-            <video className="rounded-b-lg" width="320" height="240" controls>
-              <source src={videoFile} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </>
-      )}
-      <div className="m-6">
-        <h2 className="text-2xl font-bold text-slate-50 mx-auto">
-          You have come across a patient of Snake Bite. Now choose appropriate actions.
-        </h2>
-      </div>
+      <h2 className="text-2xl font-bold text-slate-50 mx-auto">
+        You have come across a patient of Snake bite. Now choose appropriate
+        actions
+      </h2>
 
       {/* Deck Display */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-10 items-center w-full max-w-screen-md mx-auto">
@@ -331,10 +301,10 @@ const Level1 = ({ setCompletedLevels }) => {
                 !selectedCards1.text
                   ? setSelectedCards1
                   : !selectedCards2.text
-                    ? setSelectedCards2
-                    : !selectedCards3.text
-                      ? setSelectedCards3
-                      : setSelectedCards4
+                  ? setSelectedCards2
+                  : !selectedCards3.text
+                  ? setSelectedCards3
+                  : setSelectedCards4
               )
             }
           >
@@ -380,7 +350,7 @@ const Level1 = ({ setCompletedLevels }) => {
       {showSuccessPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 w-full max-w-sm text-center">
-            <h2 className="text-lg sm:text-2xl font-bold text-amber-600 mb-4">
+            <h2 className="text-lg sm:text-2xl font-bold text-green-600 mb-4">
               Your choices are correct
             </h2>
             <button
