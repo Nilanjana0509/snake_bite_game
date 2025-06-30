@@ -6,7 +6,6 @@ import {
   useLocation,
 } from "react-router-dom"; // Use Navigate instead of Redirect
 import { useState } from "react";
-import Rules from "./Levels/Rules";
 import Level1 from "./Levels/Level1";
 import Level2 from "./Levels/Level2"; // Assuming you have these components
 import Level3 from "./Levels/Level3";
@@ -46,11 +45,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Route for Rules */}
-      <Route
-          path="*"
-          element={<Rules />}
-        />
         {/* Route for Level 1 */}
         <Route
           path="/level1"
@@ -81,28 +75,29 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/level4"
-          element={
-            <ProtectedRoute
-              completed={completedLevels.level3}
-              redirectTo="/level3"
-            >
-              <Level4 setCompletedLevels={setCompletedLevels} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/level5"
-          element={
-            <ProtectedRoute
-              completed={completedLevels.level3}
-              redirectTo="/level3"
-            >
-              <Level5 setCompletedLevels={setCompletedLevels} />
-            </ProtectedRoute>
-          }
-        />
+<Route
+  path="/level4"
+  element={
+    <ProtectedRoute
+      completed={completedLevels.level3}
+      redirectTo="/level3"
+    >
+      <Level4 setCompletedLevels={setCompletedLevels} />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/level5"
+  element={
+    <ProtectedRoute
+      completed={completedLevels.level2} // ✅ Only requires Level 2
+      redirectTo="/level2"
+    >
+      <Level5 setCompletedLevels={setCompletedLevels} />
+    </ProtectedRoute>
+  }
+/>
+
         <Route
           path="/level6"
           element={
@@ -239,8 +234,8 @@ function App() {
           path="/level13"
           element={
             <ProtectedRoute
-              completed={completedLevels.level9 || completedLevels.level10}
-              redirectTo={completedLevels.level9 ? "/level9" : "/level10"}
+              completed={completedLevels.level9}
+              redirectTo="/level9"
             >
               <Level13 setCompletedLevels={setCompletedLevels} />
             </ProtectedRoute>
@@ -296,3 +291,18 @@ function App() {
 }
 
 export default App;
+
+
+ /* <Route
+  path="/level5"
+  element={
+    <ProtectedRoute
+      completed={completedLevels.level3}
+      redirectTo="/level3"
+    >
+      <Level5 setCompletedLevels={setCompletedLevels} />
+    </ProtectedRoute>
+  }
+/>
+ 
+LEVEL 5 was PROTECTED!*/ 
